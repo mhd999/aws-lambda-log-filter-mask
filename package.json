@@ -1,0 +1,26 @@
+{
+  "name": "logs-mask-filter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "build": "node node_modules/webpack/bin/webpack",
+    "start": "npm run build && sam local invoke -e src/event.json 2>&1 | tr '\r' '\n' "
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-cloudwatch": "^3.276.0",
+    "@aws-sdk/client-cloudwatch-logs": "^3.276.0",
+    "aws-sdk": "^2.1321.0",
+    "crypto": "^1.0.1",
+    "zlib": "^1.0.5"
+  },
+  "devDependencies": {
+    "@types/node": "^18.14.2",
+    "ts-loader": "^9.4.2",
+    "typescript": "^4.9.5",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.1"
+  }
+}

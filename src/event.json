@@ -1,0 +1,5 @@
+{
+    "awslogs": {
+        "data": "<gzip_log_file_base64>"
+    }
+}

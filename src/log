@@ -1,0 +1,28 @@
+{
+    "messageType": "DATA_MESSAGE",
+    "owner": "123456789012",
+    "logGroup": "/aws/lambda/echo-nodejs",
+    "logStream": "2019/03/13/[$LATEST]94fa867e5374431291a7fc14e2f56ae7",
+    "subscriptionFilters": [
+        "LambdaStream_cloudwatchlogs-node"
+    ],
+    "logEvents": [
+        {
+            "id": "34622316099697884706540976068822859012661220141643892546",
+            "timestamp": 1552518348220,
+            "message": "8f517d59-69f3-42f7-a985-ded50ea04e56 GraphQL Query: mutation login($localNumber: String!, $password: String!) {\n  clearTrustLogin(localNumber: $localNumber, password: $password) {\n    ctsession\n    __typename\n  }\n}, Operation: login, Variables: {\"custom_field\":\"92210108\", \"localNumber\":\"92210108\",\"password\":\"Telia12345\",\"new_password\":\"Telia12345\"}"
+        },
+        {
+            "id": "34644316099697884706540976068822859012661220141643892546",
+            "timestamp": 1552518348110,
+            "message": "8f517d59-69f3-42f7-a985-ded50ea04e56 GraphQL Query: mutation login($localNumber: String!, $password: String!) {\n  clearTrustLogin(localNumber: $localNumber, password: $password) {\n    ctsession\n    __typename\n  }\n}, Operation: login, Variables: {\"custom_field\":\"92210108\", \"localNumber\":\"92210108\",\"password\":\"Telia12345\"}"
+        },
+        {
+            "id": "34644316099697884706540976068822859012661220141643892659",
+            "timestamp": 1552518348110,
+            "message": "81ed54b7-4599-4374-b300-e14376184cd6 GraphQL Query: mutation {clearTrustLogin(localNumber: "123456", password:"secretpass2") {tnid}}, Operation: null, Variables: {}"
+        }
+    ]
+}
+
+
