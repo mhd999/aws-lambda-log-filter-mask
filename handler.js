@@ -18476,7 +18476,7 @@ exports.handler = async (event) => {
         return new Promise(function (resolve, reject) {
             const logs = logEvents.map(logEvent => {
                 const logMessage = logEvent.message;
-                const pattern = /"(password|new_password)"\s*:\s*"([^"]*)"/g;
+                const pattern = /("password"|password|new_password|"new_password")\s*:\s*"([^"]*)/g;
                 const maskedMessage = logMessage?.replace(pattern, (match, key, value) => {
                     return `"${key}":"${placeholder}"`;
                 });

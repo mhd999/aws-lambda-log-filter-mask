@@ -36,12 +36,13 @@ exports.handler = async (event) => {
 
   const logRecord = await getLogRecord();
   const { logEvents, logStream } = logRecord;
+
   // Mask the senstive fields
   function maskEvent(): Promise<InputLogEvent[]> {
     return new Promise(function (resolve, reject) {
       const logs = logEvents.map(logEvent => {
         const logMessage = logEvent.message;
-        const pattern = /"(password|new_password)"\s*:\s*"([^"]*)"/g;
+        const pattern = /("password"|password|new_password|"new_password")\s*:\s*"([^"]*)/g;
 
         const maskedMessage = logMessage?.replace(pattern, (match, key, value) => {
           return `"${key}":"${placeholder}"`;
@@ -59,6 +60,7 @@ exports.handler = async (event) => {
   }
 
   const maskedLogEvents: InputLogEvent[] = await maskEvent();
+
   const logStreamName = randomBytes(20).toString('hex');
 
   // create log stream
