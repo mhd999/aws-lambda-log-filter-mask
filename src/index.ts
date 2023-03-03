@@ -4,10 +4,10 @@ import { CloudWatchLogsClient, PutLogEventsCommand, CreateLogStreamCommand, Dele
 import { MetadataBearer } from "@aws-sdk/types";
 
 exports.handler = async (event) => {
-  const placeholder = process.env.PLAEHOLDER || "*****";
+  const placeholder = process.env.PLACEHOLDER || "*****";
   const destinationLogGroupName = process.env.DESTINATION_LOG_GROUP;
   const sourceLogGroupName = process.env.SOURCE_LOG_GROUP;
-  // TODO: get sensitive phrases from env var
+  const sensitiveWords = process.env.SENSITIVE_WORDS;
 
   const payload = await Buffer.from(event.awslogs.data, 'base64');
 
@@ -42,7 +42,7 @@ exports.handler = async (event) => {
     return new Promise(function (resolve, reject) {
       const logs = logEvents.map(logEvent => {
         const logMessage = logEvent.message;
-        const pattern = /("password"|password|new_password|"new_password")\s*:\s*"([^"]*)/g;
+        let pattern = new RegExp(`(${sensitiveWords})\s*:\s*"([^"]*)`, 'g');
 
         const maskedMessage = logMessage?.replace(pattern, (match, key, value) => {
           return `"${key}":"${placeholder}"`;
@@ -60,7 +60,6 @@ exports.handler = async (event) => {
   }
 
   const maskedLogEvents: InputLogEvent[] = await maskEvent();
-
   const logStreamName = randomBytes(20).toString('hex');
 
   // create log stream

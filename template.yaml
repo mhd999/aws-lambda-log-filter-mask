@@ -13,4 +13,6 @@ Resources:
       Environment:
         Variables:
           DESTINATION_LOG_GROUP:
-          SOURCE_LOG_GROUP: 
+          SOURCE_LOG_GROUP:
+          SENSITIVE_WORDS:
+          PLACEHOLDER:

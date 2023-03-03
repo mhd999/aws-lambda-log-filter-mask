@@ -3,6 +3,8 @@ variable "aws_region" {
 }
 variable "source_log_group" {}
 variable "destination_log_group" {}
+variable "sensitive_words" {}
+variable "placeholder" {}
 variable "filter_pattern" {
   default = ""
 }
@@ -27,6 +29,14 @@ resource "aws_cloudwatch_log_group" "destination_log_group" {
   retention_in_days = 60
 }
 
+resource "random_string" "lambda_postfix_generator" {
+  length  = 16
+  upper   = true
+  lower   = true
+  numeric = true
+  special = false
+}
+
 resource "aws_lambda_function" "filter_and_mask_logs" {
   filename      = "filter-and-mask-logs.zip"
   function_name = "filter-and-mask-logs"
@@ -39,6 +49,8 @@ resource "aws_lambda_function" "filter_and_mask_logs" {
       SOURCE_LOG_GROUP = data.aws_cloudwatch_log_group.source_log_group.name
       # FILTER_PATTERN         = "password"
       DESTINATION_LOG_GROUP = aws_cloudwatch_log_group.destination_log_group.name
+      SENSITIVE_WORDS       = var.sensitive_words
+      PLACEHOLDER            = var.placeholder
     }
   }
 
