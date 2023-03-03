@@ -4,7 +4,7 @@ An AWS Lambda function that is designed to filter logs to remove sensitive data,
 ## Provision the Lambda using Terraform
 ```
 module "log-filter-mask" {
-  source = "github.com/mhd999/aws-lambda-log-filter-mask?ref=v0.0.3"
+  source = "github.com/telia-oss/aws-lambda-log-filter-mask?ref=v0.0.3"
 
   source_log_group      = "/aws/appsync/apis/abc"
   destination_log_group = "aws/sensitive/data"
